@@ -142,7 +142,7 @@ commands = {}
 @tree.command(name = "addcommand", description = "Adds a custom command to the bot.")
 async def addcommand(interaction: discord.Interaction, message: str, answer: str):
     # Check if the user has the necessary permissions
-    if interaction.channel.permissions_for(interaction.author).manage_messages:
+    if interaction.channel.permissions_for(interaction.user).manage_messages:
         # Check if the bot has the necessary permissions
         if interaction.channel.permissions_for(interaction.guild.me).manage_messages:
             # Add the message and answer pair to the commands dictionary
@@ -164,7 +164,7 @@ with open("commands.txt", "r") as f:
 @tree.command(name = "removecommand", description = "Removes a command from the commands dictionary.")
 async def removecommand(interaction: discord.Interaction, message: str):
   # Check if the user has the necessary permissions
-  if interaction.channel.permissions_for(interaction.author).manage_messages:
+  if interaction.channel.permissions_for(interaction.user).manage_messages:
     # Check if the bot has the necessary permissions
     if interaction.channel.permissions_for(interaction.guild.me).manage_messages:
       # Check if the message is a key in the commands dictionary
