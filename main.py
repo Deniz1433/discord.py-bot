@@ -215,4 +215,4 @@ except discord.errors.HTTPException:
     system("python restarter.py")
     system('kill 1')
 #Keep bot always online on replit  
-#client.run("MTA1MDg2MTM3MjQ0OTIzOTA4MA.GTF4kQ.8f1Mhi0Jq1Ga3baze7hZwSNLNe_mijGKkJR3gQ")
+#client.run("TOKEN")
