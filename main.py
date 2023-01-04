@@ -8,7 +8,11 @@ import json
 import re
 import os
 import sympy
+from dotenv import load_dotenv
 
+DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+APILAYER_API_KEY = os.getenv("APILAYER_API_KEY")
+load_dotenv()
 class aclient(discord.Client):
     def __init__(self):
         super().__init__(intents=discord.Intents.all())
@@ -30,6 +34,9 @@ async def greet(interaction: discord.Interaction):
     await interaction.response.send_message("Hello there!")
 
 
+
+
+
 @tree.command(name = "math", description = "Evaluates a mathematical expression.")
 async def math(interaction: discord.Interaction, expression: str, precision: int = 2):
     try:
@@ -41,7 +48,10 @@ async def math(interaction: discord.Interaction, expression: str, precision: int
     await interaction.response.send_message(f"The answer is {result}")
 
 
-@tree.command(name = "roll", description = "Simulates rolling dice e.g 2d6 to roll 2 dice.")
+
+
+
+@tree.command(name = "roll", description = "Simulates rolling dice.")
 async def roll(interaction: discord.Interaction, dice: str):
     rolls = dice.split("d")
     total = 0
@@ -52,7 +62,7 @@ async def roll(interaction: discord.Interaction, dice: str):
 
 @tree.command(name = "dolar", description = "Fetches the current exchange rate of US dollars to Turkish lira.")
 async def dolar(interaction: discord.Interaction):
-    api_key = "TOKEN"
+    api_key = APILAYER_API_KEY
     url = "https://api.apilayer.com/fixer/latest"
     headers = {"apikey": api_key}
     params = {"base": "USD", "symbols": "USD,TRY"}
@@ -69,7 +79,7 @@ async def dolar(interaction: discord.Interaction):
 
 @tree.command(name = "euro", description = "Fetches the current exchange rate of euros to Turkish lira.")
 async def euro(interaction: discord.Interaction):
-    api_key = "TOKEN"
+    api_key = APILAYER_API_KEY
     url = "https://api.apilayer.com/fixer/latest"
     headers = {"apikey": api_key}
     params = {"base": "EUR", "symbols": "EUR,TRY"}
@@ -209,10 +219,9 @@ async def on_message(interaction: discord.Interaction):
     await interaction.channel.send(commands[interaction.content])
 
 try:
-    client.run('TOKEN')
+    client.run(DISCORD_BOT_TOKEN)
 except discord.errors.HTTPException:
     print("\n\n\nBLOCKED BY RATE LIMITS\nRESTARTING NOW\n\n\n")
     system("python restarter.py")
     system('kill 1')
-#Keep bot always online on replit  
-#client.run("TOKEN")
+ 
