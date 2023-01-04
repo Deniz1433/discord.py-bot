@@ -5,7 +5,9 @@ from discord.ext import commands
 import requests
 import random
 import json
-
+import re
+import os
+import sympy
 
 class aclient(discord.Client):
     def __init__(self):
@@ -29,9 +31,14 @@ async def greet(interaction: discord.Interaction):
 
 
 @tree.command(name = "math", description = "Evaluates a mathematical expression.")
-async def math(interaction: discord.Interaction, expression: str):
-    result = eval(expression)
-    await interaction.response.send_message(f"The answer is {result}.")
+async def math(interaction: discord.Interaction, expression: str, precision: int = 2):
+    try:
+        result = sympy.sympify(expression).evalf(precision)
+    except sympy.SympifyError:
+        await interaction.response.send_message("Invalid expression.")
+        return
+    re.sub("^(\-?)0\.", r'\1.', "%.4f" % result)
+    await interaction.response.send_message(f"The answer is {result}")
 
 
 @tree.command(name = "roll", description = "Simulates rolling dice e.g 2d6 to roll 2 dice.")
@@ -201,5 +208,11 @@ async def on_message(interaction: discord.Interaction):
     # Send the corresponding answer to the Discord channel
     await interaction.channel.send(commands[interaction.content])
 
-
-client.run("TOKEN")
+try:
+    client.run('TOKEN')
+except discord.errors.HTTPException:
+    print("\n\n\nBLOCKED BY RATE LIMITS\nRESTARTING NOW\n\n\n")
+    system("python restarter.py")
+    system('kill 1')
+#Keep bot always online on replit  
+#client.run("MTA1MDg2MTM3MjQ0OTIzOTA4MA.GTF4kQ.8f1Mhi0Jq1Ga3baze7hZwSNLNe_mijGKkJR3gQ")
