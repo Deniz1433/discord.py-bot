@@ -107,7 +107,7 @@ async def say(interaction: discord.Interaction, *, message: str):
   await interaction.channel.send(message)
 
 
-@tree.command(name="joke",mdescription="Fetches a random joke from the icanhazdadjoke API and sends it to the channel.")
+@tree.command(name="joke", description="Fetches a random joke from the icanhazdadjoke API and sends it to the channel.")
 async def joke(interaction: discord.Interaction):
   # Fetch a random joke from the icanhazdadjoke API
   response = requests.get("https://icanhazdadjoke.com/",
