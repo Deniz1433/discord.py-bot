@@ -62,10 +62,7 @@ async def roll(interaction: discord.Interaction, dice: str):
   await interaction.response.send_message(f"You rolled a total of {total}.")
 
 
-@tree.command(
-  name="dolar",
-  description="Fetches the current exchange rate of US dollars to Turkish lira."
-)
+@tree.command(name="dolar", description="Fetches the current exchange rate of US dollars to Turkish lira.")
 async def dolar(interaction: discord.Interaction):
   api_key = APILAYER_API_KEY
   url = "https://api.apilayer.com/fixer/latest"
@@ -84,9 +81,7 @@ async def dolar(interaction: discord.Interaction):
       "Sorry, I could not fetch the current exchange rate.")
 
 
-@tree.command(
-  name="euro",
-  description="Fetches the current exchange rate of euros to Turkish lira.")
+@tree.command(name="euro", description="Fetches the current exchange rate of euros to Turkish lira.")
 async def euro(interaction: discord.Interaction):
   api_key = APILAYER_API_KEY
   url = "https://api.apilayer.com/fixer/latest"
@@ -112,11 +107,7 @@ async def say(interaction: discord.Interaction, *, message: str):
   await interaction.channel.send(message)
 
 
-@tree.command(
-  name="joke",
-  description=
-  "Fetches a random joke from the icanhazdadjoke API and sends it to the channel."
-)
+@tree.command(name="joke",mdescription="Fetches a random joke from the icanhazdadjoke API and sends it to the channel.")
 async def joke(interaction: discord.Interaction):
   # Fetch a random joke from the icanhazdadjoke API
   response = requests.get("https://icanhazdadjoke.com/",
@@ -132,11 +123,7 @@ async def joke(interaction: discord.Interaction):
   await interaction.response.send_message(joke)
 
 
-@tree.command(
-  name="quote",
-  description=
-  "Fetches a random quote from the Forismatic API and sends it to the channel."
-)
+@tree.command(name="quote", description="Fetches a random quote from the Forismatic API and sends it to the channel.")
 async def quote(interaction: discord.Interaction):
   # Fetch a random quote from the Forismatic API
   response = requests.get("http://api.forismatic.com/api/1.0/",
@@ -176,8 +163,7 @@ async def sspam(interaction: discord.Interaction):
 commands = {}
 
 
-@tree.command(name="addcommand",
-              description="Adds a custom command to the bot.")
+@tree.command(name="addcommand", description="Adds a custom command to the bot.")
 async def addcommand(interaction: discord.Interaction, message: str,
                      answer: str):
   # Check if the user has the necessary permissions
@@ -204,8 +190,7 @@ with open("commands.txt", "r") as f:
   commands = json.loads(commands_json)
 
 
-@tree.command(name="removecommand",
-              description="Removes a command from the commands dictionary.")
+@tree.command(name="removecommand", description="Removes a command from the commands dictionary.")
 async def removecommand(interaction: discord.Interaction, message: str):
   # Check if the user has the necessary permissions
   if interaction.channel.permissions_for(interaction.user).manage_messages:
