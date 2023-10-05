@@ -1,5 +1,5 @@
 # discord.py-bot
-Very basic discord.py Discord bot written in Python with the help of ChatGPT.  
+Basic Discord bot written in Python using discord.py. 
 This bot shouldn't be in any important server as it has too many permissions, spammy commands and almost no role checks.  
 It can create custom commands as message / answer pairs and store them in a text file for permenance.  
 
